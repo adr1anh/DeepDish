@@ -1,20 +1,37 @@
-# Mapping of Food Inspection Violations in the City of Chicago:
+# Visualizing Disctricts in the City of Chicago through Food Safety Inspections
 
 ## Abstract:
 
-The City of Chicago provides a dataset containing the results of food inspections it conducted since January 1st 2010. In total, there are almost 200'000 observations including information about the establishment and inspection results.
 
+The City of Chicago provides a dataset containing the results of food inspections it conducted since January 1st 2010. In total, there are almost 200'000 observations including information about the establishment and inspection results. 
 
 Our goal in this project is to visualize the city of Chicago as a graph of the food violation in an appealing and concise way in order to analyse the streets where the most violation occurs. In a second part we can thus use another dataset provided by the Chicago Data Portal such as Crimes - 2001 to present and look for correlation between th district with high crime and food violation.  Through this we hope to gain deeper insight into how the city of Chicago can be analyzed and which implications on the population can be inferred by food violation.
 
 ## Research Questions:
 
-How to efficiently create a graph from our dataset?
-How to map correlation on a graph?
+- Do we get a different representation of the districts of Chicago, when looking at the food establishments and their inspection score.
+- How accurate are internet reviews in predicting the risk level.
+- 
 
 ## Dataset 
+- [Chicago Food Inspections](https://www.kaggle.com/chicago/chicago-food-inspections)
+- [Yelp Open Dataset](https://www.yelp.com/dataset)
 
 ## Internal Milestones
+- General data cleaning.
+	- Set the right types for each column (categories, geolocation data. 
+	- Check for duplicates.
+- Find a way to visualize information on a map, according the adresses or geolocation.
+	- Make a heatmap of risky establishments according to facitlty type and risk category.
+	- Find best conditions to categorize establishments into seperate disctricts.
+- Explore the Yelp data base to add information for each establishment.
+	- Customer reviews can be interesting to correlate with actual inspection results.
+	- Get information about the type of establishment such as food type, price, and popularity.
+ 	- Analyse reviews for mentions of food safety.
+	- Can we get predictions of the health inspection score using only reviews? This would allow the health inspectors to more efficently do their jobs. 
+	- Do reviews correctly represent the risk rating of an establishment.
+- Potentially find other datasets provided by the City of Chicago.
 
 ## Questions for TAs
-- Given the big number of datasets available by the 
+- Given the big number of datasets made available by the City of Chicago, it would make a lot of sense to include some extra information. To what extent should we explore other datasets in contrast to focusing more on the current one?
+- 
