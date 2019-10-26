@@ -1,10 +1,10 @@
-# Visualizing Disctricts in the City of Chicago through Food Safety Inspections
+# Visualizing Districts in the City of Chicago through Food Safety Inspections
 
 ## Abstract:
 
 
 The City of Chicago provides a dataset containing the results of food inspections it conducted since January 1st 2010. In total, there are almost 200'000 observations including information about the establishment and inspection results. 
-As a first step, we will visualize this information in maps. Our aim will be to find patterns exhibited in the data. Then, using clustering techniques, we can redefine disctricts.
+As a first step, we will visualize this information in maps. Our aim will be to find patterns exhibited in the data. Then, using clustering techniques, we will look at the possibility of redefining districts.
 Later, we will also incorporate the Yelp Open Dataset to better categorize the different establishments. This could give us another risk indicator, which could be used to asses whether to perform an inspection.
 Finally and if time allows us to go further, we hope to use other available datasets from the [Chicago Data Portal](https://data.cityofchicago.org) and explore relations to other socio-economic factors.
 
