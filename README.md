@@ -1,4 +1,4 @@
-# Visualizing Districts in the City of Chicago through Food Safety Inspections
+# DeepDish: Using food safety data to visualize Chicago
 
 ## Abstract:
 
