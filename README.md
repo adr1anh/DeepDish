@@ -47,17 +47,23 @@ One problem with this approach is that we are limited to 5'000 API calls per day
 
 ## Goals for Milestone 1
 
-How far have we gone with regards to the goals set at the previous milestone?
+How far have we gone with regards to the goals set at the previous milestone? We discuss this here and outline our goals for the next milestone.
+
 #### General data cleaning
 Say something about the categories, missing values, risk level and violations 
 
 
 #### Find a way to visualize information on a map, according the adresses or geolocation.
 
+We did an introductory analysis to understand the distribution of the risk level and the number of inspections over time and analyze the results. 
 
+In order to visualize the data geographically, we followed two approaches. The first one is based on the Zip code number. Here we used Folium to split Chicago into 60 Zip codes and colored the map according to different metrics. The second approach was based on splitting the data by the risk variable and plotting resulting heatmaps using foliums. To go further in this analysis, we initially wanted to use the HeatMapWithTime plugin of Folium, however we discussed our issues for this in the notebook. 
 
-- Make a heatmap of risky establishments according to facitlty type and risk category.
-- Find best conditions to categorize establishments into seperate disctricts.
+We thus have made advances for our two first research questions and are able to engage in a more precise analysis and results for the next milestone, as we are now better acquainted with the data and the visulation tools.
+
+As for the third question, it may not be interesting to engage in redesigning the districts of the city as there are yet no significant geographical distinctions. Furthermore, re-defining geographical partition appears very complicated. Indeed, we already had to find a .json file online to allow us to split the city by its zip codes, and building such a file seems quite complicated.
+
+For the next milestone, we can look deeper at the visualization in function of the violation categories and how it compares to the risk given to the establishment. We would also like to investigate geographical repartition as a function of the violations. 
 
 	
 #### Explore the Yelp data base to add information for each establishment.
@@ -74,5 +80,16 @@ This goal was established before realizing that the Yelp Open Dataset did not co
 #### Potentially find other datasets provided by the City of Chicago.
 We have not explored other dataset since we decided to focus on the current two.
 
+
+#### Predicting the risk level.
+
+
 ## Questions for TAs
 - Given the big number of datasets made available by the City of Chicago, it would make a lot of sense to include some extra information. To what extent should we explore other datasets in contrast to focusing more on the current one?
+-Using function HeatMapWithTime(): We have not been able to see our result using this function and have found that it maybe a current of the folium package:
+https://github.com/python-visualization/folium/issues/1232
+https://github.com/python-visualization/folium/issues/1231
+If this is the case, is there any alternatives that you would recommend ?
+
+
+
