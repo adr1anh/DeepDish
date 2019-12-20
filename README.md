@@ -2,7 +2,13 @@
 
 ## Abstract:
 
-The City of Chicago provides a dataset containing the results of food inspections it conducted since January 1st 2010. In total, there are almost 200'000 observations including information about the establishment and inspection results. 
+
+
+
+The City of Chicago provides a dataset containing the results of food inspections it conducted since January 1st 2010. In total, there are almost 200'000 observations including information about the establishment and inspection results.
+
+As a first step, we explore 
+
 As a first step, we will visualize this information in maps. Our aim will be to find patterns exhibited in the data.
 Using the Yelp API, we will complete the missing data and use their rating system to complement our analysis. This could give us another risk indicator, which could be used to assess whether to perform an inspection.
 By analyzing the violation types and comments, we aim to build a model predicting the result of the inspection (pass / fail).
@@ -10,6 +16,19 @@ Finally and if time allows us to go further, we hope to use other available data
 
 
 ## Research Questions:
+
+##### NEW
+- Do the sanitary conditions of food establishments vary with respect to geography?
+	- Do new geographical pattern appear?
+	- blabla
+- How do user-generated online reviews help us understand whether an establishment passes or not its inspection?
+	- Is there a clear difference in establishments that fail their inspections?
+	- Can we predict the result given its online rating?
+- What information can we extract from inspector's comments to complement the existing features of the dataset?
+	- Do certain words clearly 
+- How can we forecast and observe trends in these inspections over time?
+
+##### OLD
 - Are there geographical patterns with respect to food quality?
 - Do we get a different representation of the districts of Chicago, when looking at the food establishments and their inspection score?
 - How accurate are internet reviews in predicting the risk level?
