@@ -2,18 +2,24 @@
 
 ## Abstract:
 
-The City of Chicago provides a dataset containing the results of food inspections it conducted since January 1st 2010. In total, there are almost 200'000 observations including information about the establishment and inspection results. 
-As a first step, we will visualize this information in maps. Our aim will be to find patterns exhibited in the data.
-Using the Yelp API, we will complete the missing data and use their rating system to complement our analysis. This could give us another risk indicator, which could be used to assess whether to perform an inspection.
-By analyzing the violation types and comments, we aim to build a model predicting the result of the inspection (pass / fail).
-Finally and if time allows us to go further, we hope to use other available datasets from the [Chicago Data Portal](https://data.cityofchicago.org) and explore relations to other socio-economic factors.
+
+
+
+To ensure food quality and safety to their fellow citizens, the Chicago Department of Public Health (CDPH) conducts regular inspections of every establishment providing food. We provide an analysis of food violations in Chicago and analyze results of these inspections to assess the most critical food violations. Afterwards, we take a look at the most representative comments arising from failed inspections through NLP. Then, we forecast the evolution of failed inspections for the next year. Moreover, we complement the dataset with data collected through Yelp.
 
 
 ## Research Questions:
-- Are there geographical patterns with respect to food quality?
-- Do we get a different representation of the districts of Chicago, when looking at the food establishments and their inspection score?
-- How accurate are internet reviews in predicting the risk level?
-- Are the comments and violation types from an inspection good predictors for the reuslt of the inspection?
+
+- Do the sanitary conditions of food establishments vary with respect to geography and can we observe new geographical patterns?
+- How do user-generated online reviews help us understand whether an establishment passes or not its inspection?
+	- Is there a clear difference in establishments that fail their inspections?
+	- Can we predict the result given its online rating?
+- What information can we extract from inspector's comments using NLP techniques to complement the existing features of the dataset?
+	- What are the most significant words in failed inspection comments?
+	- Are there strong dependencies between geographical locations and certain words.
+- Can we preidct the future percentage of failed inspections using temporal data?
+- Are violations 1-14 indeed the most serious as asserted in the dataset description?
+
 
 ## Dataset 
 ### [Chicago Food Inspections](https://www.kaggle.com/chicago/chicago-food-inspections)
@@ -22,7 +28,11 @@ We present a section of the raw dataset.
 
 <table border="1" class="dataframe">  <thead>    <tr style="text-align: right;">      <th></th>      <th>Inspection ID</th>      <th>DBA Name</th>      <th>AKA Name</th>      <th>License #</th>      <th>Facility Type</th>      <th>Risk</th>      <th>Address</th>      <th>City</th>      <th>State</th>      <th>Zip</th>      <th>Inspection Date</th>      <th>Inspection Type</th>      <th>Results</th>      <th>Violations</th>      <th>Latitude</th>      <th>Longitude</th>      <th>Location</th>      <th>Historical Wards 2003-2015</th>      <th>Zip Codes</th>      <th>Community Areas</th>      <th>Census Tracts</th>      <th>Wards</th>    </tr>  </thead>  <tbody>    <tr>      <th>0</th>      <td>2320315</td>      <td>SERENDIPITY CHILDCARE</td>      <td>SERENDIPITY CHILDCARE</td>      <td>2216009.0</td>      <td>Daycare Above and Under 2 Years</td>      <td>Risk 1 (High)</td>      <td>1300 W 99TH ST</td>      <td>CHICAGO</td>      <td>IL</td>      <td>60643.0</td>      <td>2019-10-23T00:00:00.000</td>      <td>License Re-Inspection</td>      <td>Pass</td>      <td>NaN</td>      <td>41.714168</td>      <td>-87.655291</td>      <td>{\'longitude\': \'41.7141680989703\', \'latitude\': \'-87.65529116028439\'}</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>    </tr>    <tr>      <th>1</th>      <td>2320342</td>      <td>YOLK TEST KITCHEN</td>      <td>YOLK TEST KITCHEN</td>      <td>2589655.0</td>      <td>Restaurant</td>      <td>Risk 1 (High)</td>      <td>1767 N MILWAUKEE AVE</td>      <td>CHICAGO</td>      <td>IL</td>      <td>60647.0</td>      <td>2019-10-23T00:00:00.000</td>      <td>Canvass</td>      <td>Pass w/ Conditions</td>      <td>23. PROPER DATE MARKING AND DISPOSITION - Comments: ... </td>      <td>41.913588</td>      <td>-87.682203</td>      <td>{\'longitude\': \'41.9135877900482\', \'latitude\': \'-87.68220283542529\'}</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>    </tr>    <tr>      <th>2</th>      <td>2320328</td>      <td>LAS ASADAS MEXICAN GRILL</td>      <td>LAS ASADAS MEXICAN GRILL</td>      <td>2583309.0</td>      <td>Restaurant</td>      <td>Risk 1 (High)</td>      <td>3834 W 47TH ST</td>      <td>CHICAGO</td>      <td>IL</td>      <td>60632.0</td>      <td>2019-10-23T00:00:00.000</td>      <td>Canvass</td>      <td>Out of Business</td>      <td>NaN</td>      <td>41.808025</td>      <td>-87.720037</td>      <td>{\'longitude\': \'41.80802515275297\', \'latitude\': \'-87.72003743037237\'}</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>    </tr>    <tr>      <th>3</th>      <td>2320319</td>      <td>LA PALAPITA</td>      <td>LA PALAPITA</td>      <td>2694702.0</td>      <td>Restaurant</td>      <td>Risk 1 (High)</td>      <td>3834 W 47TH ST</td>      <td>CHICAGO</td>      <td>IL</td>      <td>60632.0</td>      <td>2019-10-23T00:00:00.000</td>      <td>License</td>      <td>Pass</td>      <td>47. FOOD &amp; NON-FOOD CONTACT SURFACES CLEANABLE, PROPERLY DESIGNED, CONSTRUCTED &amp; USED - Comments: ...</td>      <td>41.808025</td>      <td>-87.720037</td>      <td>{\'longitude\': \'41.80802515275297\', \'latitude\': \'-87.72003743037237\'}</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>    </tr>    <tr>      <th>4</th>      <td>2320228</td>      <td>47TH ST CANTINA</td>      <td>47TH ST CANTINA</td>      <td>2678250.0</td>      <td>Liquor</td>      <td>Risk 3 (Low)</td>      <td>4311 W 47TH ST</td>      <td>CHICAGO</td>      <td>IL</td>      <td>60632.0</td>      <td>2019-10-22T00:00:00.000</td>      <td>License</td>      <td>Pass w/ Conditions</td>      <td>3. MANAGEMENT, FOOD EMPLOYEE AND CONDITIONAL EMPLOYEE; KNOWLEDGE, RESPONSIBILITIES AND REPORTING - Comments: ...</td>      <td>41.807662</td>      <td>-87.731480</td>      <td>{\'longitude\': \'41.80766199360051\', \'latitude\': \'-87.73148027311129\'}</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>      <td>NaN</td>    </tr>  </tbody></table>
 
-Our goal for this first milestone was to make it as usable as possible for our analysis.
+There 196'030 rows, with observations dated from 2010 until this year. All establishments are characterized by two names (**D**oing **B**usiness **A**s (DBA) and **A**lso **K**nown **A**s (AKA)) and a complete address including GPS coordinates.
+
+For each inspection, we are given an identifier, an *a priori* risk level, the result of the inspection as well as the nature of it (business opening, random check, following a complaint, ...), and sometimes some comments left by the inspector.
+
+We explore in further details the contents of the dataset in the next section explaining data cleaning process.
 
 
 
@@ -37,12 +47,50 @@ From the scrapping we were able to perform, Yelp was able to match about 66% of 
 
 Once we have theses business IDs, we can query the API again and get the full information for a business including *is_closed*, *rating*, *review count*, *food categories* and *price*.
 
-One of our research goals was to use the reviews to infer somethings from the inspection score. This might no longer be possible as we can only get 3 reviews per establishment, with some text cropped. We have still started scrapping these.
+One of our research goals was to use the reviews to infer somethings from the inspection score. This might no longer be possible as we can only get 3 reviews per establishment, with some text cropped. Due to the limited number of API calls, we have not gone forward with this idea.
 
 One problem with this approach is that we are limited to 5'000 API calls per day, and each call to a *business match query*, *business query*, and *review query* counts for one call. With 32'374 unique businesses, we would need about 78'000 API calls. We are in contact with Yelp to increase our limit. If this is not possible we can consider only doing analyses on a subset of the full dataset.
 
+## Individual Contributions
 
-## Updates on Previous Milestone and New Goals 
+- Adrian: Yelp data scrapping and analyis, data cleaning, finalizing submission.
+- Edouard: Cleaning data, exploratory data analysis and plotting heatmaps, finalizing submission.
+- Marc: Creating Choropleth maps, Classification and time series forecasting
+- Rayan: Data Cleaning, feature importance and NLP insight for violations
+
+Everybody contributed to writing the report and the finalization of the submission. We will also work together to prepare the final presentation.
+
+## Updates on Previous Milestone:
+
+### Map visualization:
+
+Here we updated our previous two approaches to take into account the dates of the inspections. To do so we have created new heatmaps charaterized by risk level as before and looked at the number of establishment with those risk through time. The plot can be found in the Nbviewer notebook. Furthermore we have created Time Slider Choropleth Maps to visualize the evolution through time of the violation level in each Zip codes areas.
+
+### Predicting inspection outcome:
+
+For this section we have considered two approaches: 
+
+First we cleaned the violation column in our data-set and gave a numerical value to each violations. Using this we fitted a random Forest algorithm to predict the outcome of an inspection considering only Pass or Fail as a result. We can see that we obtain a very high accuracy(92%). We then used our algorithm to do feature importance and looked at which vioaltions gives the higher risk to fail an exam and have found some differences with the result proposed by the Chicago Department of Public Health’s Food Protection for which violations are considered more dangerous.
+
+Secondly we wanted to look to forecast the percentage of fail exams in each month for the year 2020. To do so, we created a time series containing the percentage of failed exam in each month and looked at the trend and seasonality of the dataset. We then decided to fit a seasonal exponential smoothing algorithm that fitted well our data and used it to forecast the percentage of failed exam in the next year.
+
+### NLP Insigth:
+
+
+We further explored the comments in the violations to see what new information we could get about failed inspections and which words are the most significant in this context. Moreover, we begin to highlight geographical dependencies among these comments through several plots.
+
+### Updating Yelp Dataset:
+
+We were able to complete the matching and scrapping of all establishments. We found 12'100 unique establishments out of 32'374 total unique entries, or about 37%. With a complete dataset, we combined both sources and focused particularly on the price, rating, and review count features. Our analysis shows that restaurants in the $30 or more range have an average score difference of 0.4 between those passing or failing the latest inspection. We also tried fitting logistic models without much success. 
+
+
+Example
+Edouard : Cleaning Data, Exploratory data analysis and plotting Heatmaps;
+Rayan : Data Cleaning, feature importance and NLP insight for violations;
+Marc : Creating Choropleth maps, Classification and time series forecasting;
+Eve: : Web-scrapping, cleaning Yelp Dataset and predictions through Yelp;
+
+## Previous Milestone 
 
 How far have we gone with regards to the goals set at the previous milestone? We discuss this here and outline our goals for the next milestone. The main notebook is contained in the 'chicago_project.ipynb' file.
 
@@ -89,12 +137,4 @@ We have not explored other dataset since we decided to focus on the current two.
 
 We would like to assess the predictive capability of the variables in the dataset in order to predict the outcome of the inspection (pass/fail). The new directions for data analysis highlighted in the sections above, specifically concerning the violation type and the comments associated will help us in this regard. 
 This might involve some light natural language processing.
-
-## Questions for TAs
-- Given the big number of datasets made available by the City of Chicago, it would make a lot of sense to include some extra information. To what extent should we explore other datasets in contrast to focusing more on the current one?
--Using function HeatMapWithTime(): We have not been able to see our result using this function and have found that it maybe a current of the folium package:
-https://github.com/python-visualization/folium/issues/1232
-https://github.com/python-visualization/folium/issues/1231
-If this is the case, is there any alternatives that you would recommend ?
-
 
